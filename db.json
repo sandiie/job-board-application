@@ -1,23 +1,31 @@
-[
+{
+  "jobs": [
     {
-        "id": 1,
-        "title": "Frontend Developer",
-        "companyName": "Flartiron School.",
-        "location": "New York",
-        "description": "We are looking for a frontend developer with experience in HTML, CSS, and JavaScript."
+      "id": "3",
+      "title": "Electrical engineering",
+      "company_name": "Kplc",
+      "location": "Nairobi",
+      "description": "An electrician responsible for installing, maintaining and repairing all wirings and lighting systems.",
+      "available_slots": 20,
+      "slots_remained": 18
     },
     {
-        "id": 2,
-        "title": "Backend Developer",
-        "companyName": "Moringa School.",
-        "location": "Ngong Road",
-        "description": "Join our team as a backend developer and work on exciting projects using Node.js and MongoDB."
+      "id": "4",
+      "title": "Plumbing",
+      "company_name": "Davis & shertliff",
+      "location": "South C",
+      "description": "A plumber who will install and repair pipes and fixtures that carry water,gas or other fluids in homes and businesses.",
+      "available_slots": 20,
+      "slots_remained": 15
     },
     {
-        "id": 3,
-        "title": "Junior Developer",
-        "companyName": "JKIA",
-        "location": "Mombasa Road",
-        "description": "Seeking a talented junior developer to create beautiful webs"
+      "id": "5",
+      "title": "Journalism",
+      "company_name": "Mara",
+      "location": "Narok",
+      "description": "One who will research,write,edit and file news stories, features and articles.",
+      "available_slots": 20,
+      "slots_remained": 15
     }
-]
+  ]
+}
