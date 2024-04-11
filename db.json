@@ -1,0 +1,23 @@
+[
+    {
+        "id": 1,
+        "title": "Frontend Developer",
+        "companyName": "Flartiron School.",
+        "location": "New York",
+        "description": "We are looking for a frontend developer with experience in HTML, CSS, and JavaScript."
+    },
+    {
+        "id": 2,
+        "title": "Backend Developer",
+        "companyName": "Moringa School.",
+        "location": "Ngong Road",
+        "description": "Join our team as a backend developer and work on exciting projects using Node.js and MongoDB."
+    },
+    {
+        "id": 3,
+        "title": "Junior Developer",
+        "companyName": "JKIA",
+        "location": "Mombasa Road",
+        "description": "Seeking a talented junior developer to create beautiful webs"
+    }
+]
