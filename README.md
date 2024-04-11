@@ -17,8 +17,9 @@ This Job Board App is a web application that allows users to post job vacancies,
 
 ## Installation
 1. Clone the repository.
-2. Install JSON Server by running `npm install -g json-server`.
+2. Install JSON Server by running `npm install -g json-server` in the terminal VScode 
 3. Start JSON Server by running `json-server --watch db.json --routes routes.json`.
+ OR  run `json-server --watch db.json --routes.json`.
 4. Open `index.html` in your browser to use the application.
 
 ## Usage
