@@ -25,8 +25,8 @@ header, footer {
     width: 270px;
     background-color: black;
     color: white;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 30px;
+    padding-bottom: 30px;
     border: 2px solid #8F8073;
     box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.2);
 }
@@ -90,6 +90,45 @@ button {
 
     .card-details {
         width: 100%;
-        max-width: 100%;
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
     }
+} 
+.body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
 }
+
+nav {
+    background-color:white;
+}
+
+nav ul {
+    list-style:circle;
+    padding: 20px;
+    margin: 0;
+    display:flex;
+}
+
+nav ul li {
+    flex: 1;
+    text-align: center;
+}
+
+.nav ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    display: block;
+}
+
+.content {
+    padding: 100px;
+}
+
+
+
