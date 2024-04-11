@@ -1,85 +1,130 @@
-document.addEventListener("DOMContentLoaded", function() {
-    const addJobModal = document.getElementById('addJobModal');
-    const titleInput = document.getElementById('title');
-    const companyInput = document.getElementById('company');
-    const locationInput = document.getElementById('location');
-    const descriptionInput = document.getElementById('description');
+let apiURL = "http://localhost:3000/jobs"
 
-    // Fetch job postings from JSON server
-    function fetchJobs() {
-        fetch('http://localhost:3000/jobs')
-            .then(response => response.json())
-            .then(json => {
-                document.getElementById('jobList').innerHTML = '';
-                json.forEach(job => {
-                    displayJob(job);
-                });
-            });
-    }
+const fetchData = () => {
+    fetch(apiURL)
+    .then(res => res.json())
+    .then(data => {
+        listNames(data)
+        fetchFirstData(data)
+    })
+}
 
-    fetchJobs();
+const fetchFirstData = (value) => {
+    let first = value[0]
+    console.log(first)
+    detailDescription(first)
+}
 
-    document.getElementById('addJobBtn').addEventListener('click', function() {
-        addJobModal.classList.remove('hidden');
-    });
+const listNames = (value) => {
+    value.forEach(element => {
+        let titleContainer = document.querySelector(".job-list")
+        let soldOut = document.querySelector(".sold-out")
+        let names = document.createElement("a")
+        names.innerHTML = element.title
 
-    document.getElementById('closeModalBtn').addEventListener('click', function() {
-        addJobModal.classList.add('hidden');
-    });
+        let diff = parseInt(element.available_slots) - parseInt(element.slots_remained)
 
-    document.getElementById('saveJobBtn').addEventListener('click', function() {
-        const jobData = {
-            title: titleInput.value,
-            company: companyInput.value,
-            location: locationInput.value,
-            description: descriptionInput.value
-        };
+        if (diff <= 0){
+            let soldnames = document.createElement("a")
+            soldnames.innerText = value.title
+            soldOut.appendChild(names)
 
-        fetch('http://localhost:3000/jobs', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(jobData)
-        }).then(response => {
-            if (response.ok) {
-                fetchJobs();
-                addJobModal.classList.add('hidden');
-                titleInput.value = '';
-                companyInput.value = '';
-                locationInput.value = '';
-                descriptionInput.value = '';
-            } else {
-                console.error('Failed to add job');
-            }
-        });
-    });
-
-    document.getElementById('jobList').addEventListener('click', function(event) {
-        if (event.target.classList.contains('deleteJobBtn')) {
-            const jobId = event.target.getAttribute('data-id');
-            fetch(`http://localhost:3000/jobs/${jobId}`, {
-                method: 'DELETE'
-            }).then(response => {
-                if (response.ok) {
-                    fetchJobs();
-                } else {
-                    console.error('Failed to delete job');
-                }
-            });
         }
-    });
+        else{
+            titleContainer.appendChild(names)
+        } 
 
-    function displayJob(job) {
-        const jobList = document.getElementById('jobList');
-        const jobCard = document.createElement('div');
-        jobCard.classList.add('bg-gray-200', 'p-4', 'rounded');
-        jobCard.innerHTML = `
-            <h2 class="text-lg font-bold">${job.title} - ${job.company}</h2>
-            <p class="text-sm text-gray-600">${job.location}</p>
-            <p class="my-2">${job.description}</p>
-            <button class="bg-red-500 text-white font-bold py-1 px-2 rounded deleteJobBtn" data-id="${job.id}">Delete</button>
-        `;
-        jobList.appendChild(jobCard);
+        let posId = element.id
+        names.addEventListener("click", () => {
+            listEachJob(posId)
+        })
+    })
+}
+
+
+const detailDescription = (value) => {
+    // let card = document.querySelector(".card")
+    let container = document.querySelector(".card-details")
+
+    let title = document.createElement("h2")
+    let company_name = document.createElement("h4")
+    let location = document.createElement("p")
+    let description = document.createElement("p")
+    let availableJobs = document.createElement("p")
+    let apply_job = document.createElement("button")
+    let deleteJob = document.createElement("button")
+
+    title.innerText = value.title
+    company_name.innerText = value.company_name
+    location.innerText = value.location
+    description.innerText = value.description
+    deleteJob.innerText = "Delete Job"
+
+    let diff = parseInt(value.available_slots) - parseInt(value.slots_remained)
+    availableJobs.innerText = `Available Slots: ${diff}`
+
+    if (diff <= 0){
+        apply_job.innerText = "SOLD OUT"
+        apply_job.disabled = true  
     }
-});
+    else{
+        apply_job.innerText = "Apply for job"
+    }
+
+    container.appendChild(title) 
+    container.appendChild(company_name)
+    container.appendChild(location) 
+    container.appendChild(description)
+    container.appendChild(availableJobs)
+    container.appendChild(apply_job) 
+    container.appendChild(deleteJob)
+    
+    apply_job.addEventListener('click', () => {
+        value.slots_remained ++
+        let slots_remained = value.slots_remained
+        let posId = value.id
+        console.log(slots_remained, posId)
+        updateSlotNum(posId, {slots_remained})      
+    })
+
+    deleteJob.addEventListener("click", () => {
+        let posId = value.id
+        deleteData(posId) // Updated function name
+    })
+}
+
+const listEachJob = (id) => {
+    fetch(`${apiURL}/${id}`)
+    .then(res => res.json())
+    .then(data => detailDescription(data))
+}
+
+
+const updateSlotNum = (id, value) => {
+    const options = {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept":"application/json"
+        },
+        body:JSON.stringify(value)
+    }
+    fetch(`${apiURL}/${id}`, options)
+    .then(res => res.json())
+}
+
+const deleteData = (id) => {
+    const options = {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept":"application/json"
+        },
+        
+    }
+    fetch(`${apiURL}/${id}`, options)
+    .then(res => res.json())
+}
+
+document.addEventListener('DOMContentLoaded',fetchData)
+    
