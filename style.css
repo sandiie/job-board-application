@@ -1,0 +1,95 @@
+/* Default styles */
+body {
+    margin: 0;
+    background-color: black;
+    color: white;
+}
+
+header, footer {
+    color: white;
+    text-align: center;
+    padding: 20px;
+    font-size: 24px;
+    background-color: blue;
+    margin-bottom: 10px;
+}
+
+.parentcontainer {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 5px 20px 5px 20px;
+}
+
+.side-bar {
+    height: 100%;
+    width: 270px;
+    background-color: black;
+    color: white;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border: 2px solid #8F8073;
+    box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.2);
+}
+
+.side-bar p {
+    text-align: center;
+    font-size: 20px;
+}
+
+.side-bar a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 16px;
+    color: #818181;
+    display: block;
+}
+
+.side-bar a:hover {
+    color: #f1f1f1;
+    cursor: pointer;
+}
+
+.job-details {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 20px;
+}
+
+.card {
+    max-width: 300px;
+    margin-bottom: auto;
+    text-align: center;
+    font-family: arial;
+    padding-right: 20px;
+}
+
+.card-details {
+    width: 600px;
+    margin-bottom: auto;
+}
+
+button {
+    padding: 10px;
+    margin-right: 10px;
+    color: white;
+    background-color: blue;
+    cursor: pointer;
+}
+
+/* Media queries for responsiveness */
+@media only screen and (max-width: 768px) {
+    .parentcontainer {
+        flex-direction: column;
+    }
+
+    .side-bar {
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .card-details {
+        width: 100%;
+        max-width: 100%;
+    }
+}
